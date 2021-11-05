@@ -96,6 +96,8 @@ function searchBook() {
     const searchTerm = document.querySelector('.js-input-search')
     const noBookFound = document.querySelector('.js-no-book-found')
     searchTerm.addEventListener('input', () => {
+        if(library.length === 0) return
+        
         const filteredBook = library.filter(book => book.title.includes(searchTerm.value) || book.title.toLowerCase().includes(searchTerm.value))
         if (filteredBook.length === 0) {
             noBookFound.classList.add('visible')
@@ -105,9 +107,7 @@ function searchBook() {
             displayBook(filteredBook)
         }
     })
-
 }
-
 
 updateDisplay()
 addToLibrary()
