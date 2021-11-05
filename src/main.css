@@ -56,6 +56,22 @@ body {
     flex-direction: column;
     align-items: center;
 }
+.no-book-is-found {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    gap: 0.2rem;
+    width: 80%;
+    max-width: 20rem;
+}
+.no-book-is-found.visible {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .no-book-title {
     font-weight: 600;
     font-size: 1.3rem;
@@ -122,6 +138,10 @@ body {
     font-weight: 600;
     font-size: 1rem;
 }
+.input-search {
+    height: 3.5rem;
+    width: 55%;
+}
 ::placeholder {
     font-weight: 600;
     color: var(--heading-clr);
@@ -139,6 +159,13 @@ body {
     border-radius: var(--border-radius);
     padding: 1rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    width: 50%;
 }
 .nav-logo {
     text-transform: uppercase;
@@ -278,8 +305,7 @@ body {
     transform: rotate(45deg);
 }
 
-
-@media only screen and (min-width: 600px){
+@media only screen and (min-width: 600px) {
     .nav-logo {
         font-size: 1.8rem;
     }
@@ -292,4 +318,3 @@ body {
         justify-content: flex-start;
     }
 }
-

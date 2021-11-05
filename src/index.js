@@ -24,7 +24,7 @@ function addToLibrary() {
     const isRead = document.querySelector('input[name="checkbox"]')
     form.addEventListener('submit', (e) => {
         e.preventDefault()
-        if(isBookExist(title.valie)) return alert('book exist')
+        if (isBookExist(title.valie)) return alert('book exist')
         if (title.value === '' || author.value === '' || pages.value === '') return alert('please')
         const book = new Book(title.value, author.value, +pages.value, isRead.checked)
         library.push(book)
@@ -92,9 +92,27 @@ function isBookExist(title) {
     return book
 }
 
+function searchBook() {
+    const searchTerm = document.querySelector('.js-input-search')
+    const noBookFound = document.querySelector('.js-no-book-found')
+    searchTerm.addEventListener('input', () => {
+        const filteredBook = library.filter(book => book.title.includes(searchTerm.value) || book.title.toLowerCase().includes(searchTerm.value))
+        if (filteredBook.length === 0) {
+            noBookFound.classList.add('visible')
+            displayBook([])
+        } else {
+            noBookFound.classList.remove('visible')
+            displayBook(filteredBook)
+        }
+    })
+
+}
+
+
 updateDisplay()
 addToLibrary()
 toggleModal()
+searchBook()
 
 document.querySelector('.js-main').addEventListener('click', (e) => {
     e.preventDefault()
@@ -117,3 +135,4 @@ window.addEventListener('click', (e) => {
         e.target.classList.remove('visible')
     }
 })
+

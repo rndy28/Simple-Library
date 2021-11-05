@@ -15,17 +15,26 @@
 <body>
     <nav class="nav">
         <h1 class="nav-logo">library</h1>
-        <a href="#" class="btn btn-primary btn-large btn-create js-btn-create">Create</a>
+
+        <span class="nav-wrapper"> 
+            <input type="search" class="input input-search js-input-search" placeholder="Search book..." />
+            <a href="#" class="btn btn-primary btn-large btn-create js-btn-create">Create</a></span>
     </nav>
 
     <main class="books-grid js-main">
     </main>
-    
+
     <div class="no-book js-no-book">
         <span class="no-book-title">Your library is empty</span>
         <span class="no-book-message">
             You can create new book, just click
             the button on the top corner right</span>
+    </div>
+
+    <div class="no-book-is-found js-no-book-found">
+        <span class="no-book-title">Book no found</span>
+        <span class="no-book-message">
+            Use capital or spell more precisely</span>
     </div>
 
     <div class="modal-form js-modal">
