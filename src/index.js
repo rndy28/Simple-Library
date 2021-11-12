@@ -18,40 +18,67 @@ function Book(title, author, pages, isRead) {
 
 function addToLibrary() {
     const form = document.querySelector('.js-form')
-    const title = document.querySelector('input[name="title"]')
-    const author = document.querySelector('input[name="author"]')
-    const pages = document.querySelector('input[name="pages"]')
     const isRead = document.querySelector('input[name="checkbox"]')
+    const input = [...document.querySelectorAll('.js-input')]
+
     form.addEventListener('submit', (e) => {
         e.preventDefault()
-        if (isBookExist(title.valie)) return alert('book exist')
-        if (title.value === '' || author.value === '' || pages.value === '') return alert('please')
-        const book = new Book(title.value, author.value, +pages.value, isRead.checked)
+        input.forEach(el => {
+            const errorMsg = el.nextElementSibling
+            if (el.value === '') {
+                errorMsg.textContent = `${el.name} is required`
+                el.classList.add('error')
+            } 
+        })
+        if(isBookExist(input[0].value)) return alert('book existed!')
+        if (input[0].value === '' || input[1].value === '' || input[2].value === '') return
+        
+        const book = new Book(input[0].value, input[1].value, +input[2].value, isRead.checked)
         library.push(book)
         localStorage.setItem('library', JSON.stringify(library))
-        document.querySelector('.js-modal').classList.remove('visible')
-        clearInput(title, author, pages, isRead)
+        removeModal()
+        clearInput(input, isRead)
         updateDisplay()
     })
+
+    input.forEach(el => el.addEventListener('input', () => {
+        if(el.value !== '') {
+            el.classList.remove('error')
+            el.nextElementSibling.textContent = ''
+        }
+    }))
 }
 
-function clearInput(title, author, pages, isRead) {
-    title.value = ''
-    author.value = ''
-    pages.value = ''
+function clearInput(inputFields, isRead) {
+    inputFields.forEach(input => {
+        input.value = ''
+        input.classList.remove('error')
+        input.nextElementSibling.textContent = ''
+    })
     isRead.checked = false
 }
 
 function toggleModal() {
     const addBtn = document.querySelector('.js-btn-create')
     const modal = document.querySelector('.js-modal')
-    addBtn.addEventListener('click', () => modal.classList.add('visible'))
+    const cross = document.querySelector('.cross')
+    addBtn.addEventListener('click', () => {
+        cross.classList.add('is-clicked')
+        modal.classList.add('visible')
+
+    })
+    addToLibrary()
 }
 
 
 function toggleRead(title) {
     library.forEach(book => book.title === title ? book.isRead = !book.isRead : book)
     localStorage.setItem('library', JSON.stringify(library))
+}
+
+function removeModal() {
+    document.querySelector('.js-modal').classList.remove('visible')
+    document.querySelector('.cross').classList.remove('is-clicked')
 }
 
 function deleteBook(title, bookEl) {
@@ -65,18 +92,20 @@ function deleteBook(title, bookEl) {
 }
 
 function displayBook(library) {
-    document.querySelector('.js-main').innerHTML = library.map(el => {
+    const main = document.querySelector('.js-main')
+    main.innerHTML = library.map(el => {
         return `
         <div class='book'>
         <span class="book-title">"${el.title}"</span>
         <span class="book-author">${el.author}</span>
-        <span class="book-pages">${el.pages} ${el.pages === 1 ? 'Page' : 'Pages'}</span>
+        <span class="book-pages">${el.pages.toLocaleString('en')} ${el.pages === 1 ? 'Page' : 'Pages'}</span>
         <div class="book-wrapper">
             <a href="#" class="btn btn-small btn-isread ${el.isRead ? 'btn-success' : 'btn-secondary'}">${el.isRead ? 'Read' : 'Not Read'}</a>
             <a href="#" class="btn btn-small btn-danger btn-remove">Remove</a>
         </div>
         </div>`
     }).join(' ')
+    library.length > 3 && window.innerWidth > 600 ? main.classList.add('space-between') : main.classList.remove('space-between')
 }
 
 
@@ -92,12 +121,13 @@ function isBookExist(title) {
     return book
 }
 
+
 function searchBook() {
-    const searchTerm = document.querySelector('.js-input-search')
-    const noBookFound = document.querySelector('.js-no-book-found')
+    const searchTerm = document.querySelector('input[name="search"]')
+    const noBookFound = document.querySelector('.js-book-is-not-found')
     searchTerm.addEventListener('input', () => {
-        if(library.length === 0) return
-        
+        if (library.length === 0) return
+
         const filteredBook = library.filter(book => book.title.includes(searchTerm.value) || book.title.toLowerCase().includes(searchTerm.value))
         if (filteredBook.length === 0) {
             noBookFound.classList.add('visible')
@@ -110,7 +140,6 @@ function searchBook() {
 }
 
 updateDisplay()
-addToLibrary()
 toggleModal()
 searchBook()
 
@@ -131,8 +160,16 @@ document.querySelector('.js-main').addEventListener('click', (e) => {
 
 
 window.addEventListener('click', (e) => {
-    if (e.target.className.includes('modal-form')) {
-        e.target.classList.remove('visible')
+    if (e.target.classList.contains('modal-form')) {
+        removeModal()
     }
 })
 
+window.addEventListener('resize', () => {
+    if (window.innerWidth < 1000) {
+        document.querySelector('.js-main').classList.remove('space-between')
+    }
+    if (window.innerWidth > 1000 && library.length > 3) {
+        document.querySelector('.js-main').classList.add('space-between')
+    }
+})

@@ -11,6 +11,7 @@
     --text-clr: #2d334a;
     --border-radius: 0.4rem;
     --border: 3px solid #272343;
+    --border-error: 3px solid var(--btn-danger-bg);
 }
 *,
 *::after,
@@ -33,14 +34,23 @@ input[type="number"] {
 body {
     background-color: var(--primary-bg);
     font-family: "poppins";
-}
-.main {
+    width: 93%;
+    max-width: 80rem;
+    margin: 0 auto;
+    position: relative;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
-.no-book {
+
+.wrapper {
+    width: 100%;
+    min-height: 3rem;
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.no-book,
+.book-is-not-found {
     display: none;
     position: absolute;
     top: 50%;
@@ -51,23 +61,8 @@ body {
     width: 80%;
     max-width: 20rem;
 }
-.no-book.visible {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.no-book-is-found {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    gap: 0.2rem;
-    width: 80%;
-    max-width: 20rem;
-}
-.no-book-is-found.visible {
+.no-book.visible,
+.book-is-not-found.visible {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,27 +79,28 @@ body {
     color: inherit;
     background-color: var(--bg);
     text-decoration: none;
-    font-size: 1.1rem;
     font-weight: 600;
     border-radius: var(--border-radius);
     border: var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .btn-small {
-    height: 2.9rem;
+    height: 2.8rem;
     width: 6.5rem;
-    font-size: 0.9rem;
+    font-size: 0.813rem;
 }
 .btn-medium {
-    height: 3.3rem;
-    font-size: 1rem;
+    height: 3.2rem;
+    font-size: 0.9rem;
 }
 .btn-large {
     height: 3.5rem;
-    width: 10rem;
+    width: 8rem;
+    font-size: 1rem;
 }
 .btn-submit {
     margin-top: 0.4rem;
@@ -126,6 +122,21 @@ body {
     background-color: var(--btn-success-bg);
     color: var(--btn-success-clr);
 }
+.btn-create {
+    position: fixed;
+    bottom: 2rem;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    background-color: var(--btn-primary-bg);
+}
+.cross {
+    transform: rotate(45deg);
+    transition: transform 200ms ease-in;
+}
+.cross.is-clicked {
+    transform: rotate(0);
+}
 .input {
     border: none;
     outline: none;
@@ -138,51 +149,52 @@ body {
     font-weight: 600;
     font-size: 1rem;
 }
-.input-search {
-    height: 3.5rem;
-    width: 55%;
+.error {
+    border: var(--border-error);
 }
+.input-error-msg {
+    font-size: 0.813rem;
+    text-transform: capitalize;
+    position: relative;
+    top: -0.3rem;
+}
+
+.input-search {
+    height: 3rem;
+    width: 55%;
+    max-width: 25rem;
+}
+
 ::placeholder {
     font-weight: 600;
     color: var(--heading-clr);
     opacity: 0.8;
+    font-size: 0.9rem;
 }
 .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
-    max-width: 81rem;
-    margin: 0 auto;
     margin-top: 2.5rem;
     border: var(--border);
     border-radius: var(--border-radius);
-    padding: 1rem;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-.nav-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 1rem;
-    width: 50%;
-}
 .nav-logo {
-    text-transform: uppercase;
-    color: var(--heading-clr);
-    font-size: 1.3rem;
+    color: var(--btn-primary-clr);
+    font-size: 1.4rem;
 }
 
 .books-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, 270px);
     justify-content: center;
-    margin: 0 auto;
     margin-top: 3rem;
-    width: 90%;
-    max-width: 81rem;
     gap: 3rem;
 }
+
 .book {
     background-color: var(--secondary-bg);
     border-radius: var(--border-radius);
@@ -232,7 +244,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.6rem;
     padding: 1.5rem;
     transform: translateY(50px);
     visibility: hidden;
@@ -248,6 +260,7 @@ body {
     display: flex;
     align-items: center;
     margin-left: 0.3rem;
+    /* margin-block: 0.3rem 0.8rem; */
 }
 .checkbox-wrapper {
     position: relative;
@@ -306,15 +319,33 @@ body {
 }
 
 @media only screen and (min-width: 600px) {
-    .nav-logo {
-        font-size: 1.8rem;
+    .btn-small {
+        font-size: 0.9rem;
     }
     .btn-large {
-        width: 12rem;
+        font-size: 1.1rem;
+        width: 10rem;
+    }
+    .input-search {
+        height: 3.5rem;
+    }
+    .nav-logo {
+        font-size: 1.7rem;
+    }
+    ::placeholder {
+        font-size: 1rem;
     }
 }
-@media only screen and (min-width: 1100px) {
+
+
+@media only screen and (min-width: 1000px){
     .books-grid {
         justify-content: flex-start;
+    }
+}
+
+@media only screen and (min-width: 1300px){
+    .space-between {
+        justify-content: space-between;
     }
 }
