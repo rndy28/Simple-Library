@@ -1,0 +1,8 @@
+{
+  "name": "simple-library",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/rndy28/Simple-Library",
+  "author": "rndy28 <rendyramadhan838@gmail.com>",
+  "license": "MIT"
+}

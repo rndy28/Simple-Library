@@ -10,7 +10,7 @@
     --heading-clr: #272343;
     --text-clr: #2d334a;
     --border-radius: 0.4rem;
-    --border: 3px solid #272343;
+    --border: 2px solid #272343;
     --border-error: 3px solid var(--btn-danger-bg);
 }
 *,
@@ -31,6 +31,16 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+a {
+    text-decoration: none;
+}
+
+input,
+button {
+    font-family: inherit;
+    font-size: inherit;
+}
+
 body {
     background-color: var(--primary-bg);
     font-family: "poppins";
@@ -41,44 +51,25 @@ body {
     min-height: 100vh;
 }
 
-.wrapper {
-    width: 100%;
-    min-height: 3rem;
-    position: absolute;
+.c-nav {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2.5rem;
+    border: var(--border);
+    border-radius: var(--border-radius);
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.c-nav__logo {
+    color: var(--btn-primary-clr);
+    font-size: 1.4rem;
 }
 
-.no-book,
-.book-is-not-found {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    gap: 0.2rem;
-    width: 80%;
-    max-width: 20rem;
-}
-.no-book.visible,
-.book-is-not-found.visible {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.no-book-title {
-    font-weight: 600;
-    font-size: 1.3rem;
-    color: var(--heading-clr);
-}
-.no-book-message {
-    color: var(--text-clr);
-}
-.btn {
-    color: inherit;
+.c-btn {
     background-color: var(--bg);
-    text-decoration: none;
+    color: inherit;
     font-weight: 600;
     border-radius: var(--border-radius);
     border: var(--border);
@@ -87,57 +78,55 @@ body {
     justify-content: center;
     cursor: pointer;
 }
-
-.btn-small {
+.c-btn.small {
     height: 2.8rem;
     width: 6.5rem;
     font-size: 0.813rem;
 }
-.btn-medium {
+.c-btn.medium {
     height: 3.2rem;
     font-size: 0.9rem;
 }
-.btn-large {
+.c-btn.large {
     height: 3.5rem;
     width: 8rem;
     font-size: 1rem;
 }
-.btn-submit {
-    margin-top: 0.4rem;
-    width: 100%;
-}
-.btn-primary {
+.c-btn.primary {
     background-color: var(--btn-primary-bg);
     color: var(--btn-primary-clr);
 }
-.btn-secondary {
+.c-btn.secondary {
     background-color: var(--primary-bg);
 }
-.btn-danger {
+.c-btn.danger {
     background-color: var(--btn-danger-bg);
     color: var(--btn-danger-clr);
 }
-
-.btn-success {
+.c-btn.success {
     background-color: var(--btn-success-bg);
     color: var(--btn-success-clr);
 }
-.btn-create {
+.c-btn--submit {
+    margin-top: 0.4rem;
+    width: 100%;
+}
+.c-btn--create {
     position: fixed;
     bottom: 2rem;
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
     background-color: var(--btn-primary-bg);
+    border: var(--border);
 }
-.cross {
-    transform: rotate(45deg);
-    transition: transform 200ms ease-in;
+.c-btn--is-read {
+    display: flex;
+    align-items: center;
+    margin-left: 0.3rem;
 }
-.cross.is-clicked {
-    transform: rotate(0);
-}
-.input {
+
+.c-input {
     border: none;
     outline: none;
     height: 3.3rem;
@@ -149,53 +138,36 @@ body {
     font-weight: 600;
     font-size: 1rem;
 }
-.error {
-    border: var(--border-error);
-}
-.input-error-msg {
+.c-input__error-msg {
     font-size: 0.813rem;
     text-transform: capitalize;
     position: relative;
     top: -0.3rem;
 }
-
-.input-search {
+.c-input--search {
     height: 3rem;
     width: 55%;
     max-width: 25rem;
 }
-
-::placeholder {
+.c-input.is-error {
+    border: var(--border-error);
+}
+.c-input--search::placeholder {
     font-weight: 600;
     color: var(--heading-clr);
     opacity: 0.8;
     font-size: 0.9rem;
 }
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2.5rem;
-    border: var(--border);
-    border-radius: var(--border-radius);
-    padding: 1rem 1.5rem;
-    gap: 1rem;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+.c-cross {
+    transform: rotate(45deg);
+    transition: transform 200ms ease-in;
 }
-.nav-logo {
-    color: var(--btn-primary-clr);
-    font-size: 1.4rem;
+.c-cross.is-clicked {
+    transform: rotate(0);
 }
 
-.books-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 270px);
-    justify-content: center;
-    margin-top: 3rem;
-    gap: 3rem;
-}
-
-.book {
+.c-book {
     background-color: var(--secondary-bg);
     border-radius: var(--border-radius);
     border: var(--border);
@@ -204,20 +176,20 @@ body {
     padding: 0.8rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-.book-title {
+.c-book__title {
     font-weight: 600;
     font-size: 1.1rem;
 }
-.book-author {
+.c-book__author {
     margin-block: 0.5rem;
 }
-.book-wrapper {
+.c-book__wrapper {
     margin-top: 1.5rem;
     display: flex;
     gap: 0.7rem;
 }
 
-.modal-form {
+.c-modal {
     visibility: hidden;
     position: fixed;
     z-index: 1;
@@ -231,11 +203,44 @@ body {
     align-items: center;
     justify-content: center;
 }
-.modal-form.visible {
+.c-modal.visible {
     visibility: visible;
 }
 
-.form {
+.current-state {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    gap: 0.2rem;
+    width: 80%;
+    max-width: 20rem;
+}
+.current-state__title {
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--heading-clr);
+}
+.current-state__message {
+    color: var(--text-clr);
+}
+.current-state.visible {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.l-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 270px);
+    justify-content: center;
+    margin-top: 3rem;
+    gap: 3rem;
+}
+
+.c-form {
     background-color: var(--primary-bg);
     width: 90%;
     max-width: 27rem;
@@ -251,18 +256,17 @@ body {
     opacity: 0;
     transition: all 300ms ease;
 }
-.modal-form.visible .form {
+.c-modal.visible .c-form {
     transform: translateY(0);
     visibility: visible;
     opacity: 1;
 }
-.is-read {
+
+.c-checkbox {
     display: flex;
     align-items: center;
-    margin-left: 0.3rem;
-    /* margin-block: 0.3rem 0.8rem; */
 }
-.checkbox-wrapper {
+.c-checkbox__wrapper {
     position: relative;
     cursor: pointer;
     font-size: 22px;
@@ -271,42 +275,38 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
-
-.checkbox-wrapper input {
+.c-checkbox__input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
 }
-
-.checkmark {
+.c-checkbox__checkmark {
     position: absolute;
-    top: -12px;
-    left: 0.6rem;
-    height: 26px;
-    width: 26px;
+    top: -13px;
+    left: 1rem;
+    height: 24px;
+    width: 24px;
     background-color: var(--primary-bg);
     border: var(--border);
     border-radius: var(--border-radius);
 }
-.checkbox-wrapper:hover input ~ .checkmark {
+.c-checkbox__wrapper:hover .c-checkbox__input ~ .c-checkbox__checkmark {
     background-color: var(--btn-danger-clr);
 }
-.checkbox-wrapper input:checked ~ .checkmark {
+.c-checkbox__wrapper .c-checkbox__input:checked ~ .c-checkbox__checkmark {
     background-color: var(--secondary-bg);
 }
-
-.checkmark:after {
+.c-checkbox__checkmark::after {
     content: "";
     position: absolute;
     display: none;
 }
-
-.checkbox-wrapper input:checked ~ .checkmark:after {
+.c-checkbox__wrapper .c-checkbox__input:checked ~ .c-checkbox__checkmark::after {
     display: block;
 }
-.checkbox-wrapper .checkmark:after {
+.c-checkbox__wrapper .c-checkbox__checkmark::after {
     left: 7px;
     top: 4px;
     width: 6px;
@@ -318,33 +318,32 @@ body {
     transform: rotate(45deg);
 }
 
-@media only screen and (min-width: 600px) {
-    .btn-small {
+@media (min-width: 600px) {
+    .c-btn.small {
         font-size: 0.9rem;
     }
-    .btn-large {
+    .c-btn.large {
         font-size: 1.1rem;
         width: 10rem;
     }
-    .input-search {
+    .c-input--search {
         height: 3.5rem;
     }
-    .nav-logo {
-        font-size: 1.7rem;
-    }
-    ::placeholder {
+    .c-input--search::placeholder {
         font-size: 1rem;
+    }
+    .c-nav__logo {
+        font-size: 1.7rem;
     }
 }
 
-
-@media only screen and (min-width: 1000px){
-    .books-grid {
+@media (min-width: 1000px) {
+    .l-grid {
         justify-content: flex-start;
     }
 }
 
-@media only screen and (min-width: 1300px){
+@media (min-width: 1300px) {
     .space-between {
         justify-content: space-between;
     }

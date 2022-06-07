@@ -14,58 +14,61 @@
 
 <body>
 
-    <nav class="nav">
-        <h1 class="nav-logo">Library</h1>
-        <input type="search" class="input input-search" name="search" placeholder="Search book..." />
+    <nav class="c-nav">
+        <h1 class="c-nav__logo">Library</h1>
+        <input type="search" class="c-input c-input--search" name="search" placeholder="Search book..." />
     </nav>
 
 
-    <main class="books-grid js-main">
-    </main>
+    <main>
+        <div class="l-grid js-books-placeholder">
 
-    <div class="no-book js-no-book">
-        <span class="no-book-title">Your library is empty</span>
-        <span class="no-book-message">
-            You can create new book, just click
-            the button on the top corner right</span>
-    </div>
+        </div>
 
-    <div class="book-is-not-found js-book-is-not-found">
-        <span class="no-book-title">Book is not found</span>
-        <span class="no-book-message">
-            Use capital or spell more precisely</span>
-    </div>
+        <div class="current-state current-state--empty js-empty-library" role="status">
+            <h3 class="current-state__title">Your library is empty</h3>
+            <p class="current-state__message">
+                You can create new book, just click
+                the button on the bottom right corner or just press ctrl + b</p>
+        </div>
 
-    <div class="modal-form js-modal ">
-        <form class="form js-form">
-            <input type="text" placeholder="Title" autocomplete="off" name="title" class="input js-input" />
-            <span class="input-error-msg"></span>
-            <input type="text" placeholder="Author" autocomplete="off" name="author" class="input js-input" />
-            <span class="input-error-msg"></span>
-            <input type="number" placeholder="Pages" autocomplete="off" name="pages" class="input js-input" />
-            <span class="input-error-msg"></span>
-            <span class="is-read">Have you read it?
-                <label class="checkbox-wrapper">
-                    <input type="checkbox" name="checkbox" />
-                    <span class="checkmark"></span>
-                </label>
-            </span>
-            <button class="btn btn-primary btn-medium btn-submit">Submit</button>
-        </form>
-    </div>
+        <div class="current-state current-state--not-found js-book-not-found" role="status">
+            <h3 class="current-state__title">Book is not found</h3>
+            <p class="current-state__message">
+                Use capital or spell more precisely</p>
+        </div>
+
+        <div class="c-modal js-modal">
+            <form class="c-form js-form">
+                <input type="text" placeholder="Title" autocomplete="off" name="title" class="c-input js-input" />
+                <span class="c-input__error-msg"></span>
+                <input type="text" placeholder="Author" autocomplete="off" name="author" class="c-input js-input" />
+                <span class="c-input__error-msg"></span>
+                <input type="number" placeholder="Pages" autocomplete="off" name="pages" class="c-input js-input" />
+                <span class="c-input__error-msg"></span>
+                <span class="c-checkbox">Have you read it?
+                    <label class="c-checkbox__wrapper">
+                        <input type="checkbox" name="checkbox" class="c-checkbox__input"/>
+                        <span class="c-checkbox__checkmark"></span>
+                    </label>
+                </span>
+                <button class="c-btn c-btn--submit primary medium">Submit</button>
+            </form>
+        </div>
 
 
-    <span class="wrapper">
-        <a href="#" class="btn btn-create js-btn-create">
-            <svg class="cross" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
+        <a href="#" class="c-btn c-btn--create js-btn-create" role="button">
+            <svg class="c-cross js-cross" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M4.22676 4.22676C4.5291 3.92441 5.01929 3.92441 5.32163 4.22676L12 10.9051L18.6784 4.22676C18.9807 3.92441 19.4709 3.92441 19.7732 4.22676C20.0756 4.5291 20.0756 5.01929 19.7732 5.32163L13.0949 12L19.7732 18.6784C20.0756 18.9807 20.0756 19.4709 19.7732 19.7732C19.4709 20.0756 18.9807 20.0756 18.6784 19.7732L12 13.0949L5.32163 19.7732C5.01929 20.0756 4.5291 20.0756 4.22676 19.7732C3.92441 19.4709 3.92441 18.9807 4.22676 18.6784L10.9051 12L4.22676 5.32163C3.92441 5.01929 3.92441 4.5291 4.22676 4.22676Z"
                     fill="#030D45" />
             </svg>
         </a>
-    </span>
-    <script src="./index.js"></script>
+
+    </main>
+
+    <script src="./js/index.js" defer type="module"></script>
 </body>
 
 </html>
