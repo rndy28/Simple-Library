@@ -17,16 +17,26 @@ function isBookExist(title, library) {
  * @returns {boolean}  boolean to determine wether input is valid or not
  */
 function validateInput(inputs) {
+  /**
+   * @type {boolean}
+   */
+  let valid;
+
   inputs.forEach((input) => {
     const errorMsg = input.nextElementSibling;
+
     if (input.value === '') {
       errorMsg.textContent = `${input.name} is required`;
       input.classList.add('error');
-      return false;
+      valid = false;
     } else {
-      return true;
+      errorMsg.textContent = '';
+      input.classList.remove('error');
+      valid = true;
     }
   });
+
+  return valid;
 }
 
 function clearInput(inputFields, isRead) {

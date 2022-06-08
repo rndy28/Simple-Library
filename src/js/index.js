@@ -29,9 +29,17 @@ function addToLibrary() {
     ...document.querySelectorAll('.js-input'),
   ]);
 
+  // for validating input change
+  inputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      if (!input.classList.contains('error') && input.value !== '') return;
+      validateInput(inputs);
+    });
+  });
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (validateInput(inputs)) return;
+    if (!validateInput(inputs)) return;
     if (isBookExist(inputs[0].value, library)) return alert('book existed!');
 
     const book = Book({

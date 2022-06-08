@@ -143,6 +143,7 @@ body {
     text-transform: capitalize;
     position: relative;
     top: -0.3rem;
+    color: var(--btn-danger-bg);
 }
 .c-input--search {
     height: 3rem;
